@@ -1,4 +1,6 @@
+{% csrf_token %}
 <script>
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     if (window.addEventListener) {
         window.addEventListener('load', function() {
             let canvas;
@@ -57,4 +59,18 @@
     function _putImageData(context, imgData) {
         context.putImageData(imgData, 0, 0);
     }
+	let store_imageData = (imgData) => {
+		let xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "{% url api %}", true);
+		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		xhttp.setRequestHeader("X-CSRFToken", csrftoken); 
+		xhttp.send(JSON.stringify(imgData.data));
+	};
+let test_func = () => {
+	let canvas;
+	let context;
+	canvas = document.getElementById("{{canvas_id}}");
+	context = canvas.getContext('2d');
+	store_imageData(_getImageData(context));
+};
 </script>
