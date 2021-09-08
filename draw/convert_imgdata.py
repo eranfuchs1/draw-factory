@@ -10,6 +10,12 @@ class ListConverter:
             idx += 1
         return answer
 
+    def convert_list_to_dict(self, obj):
+        answer = {}
+        for index, value in enumerate(obj):
+            answer[str(index)] = value
+        return answer
+
 
 class ImageConverter(ListConverter):
     def __init__(self, canvas_width=400, canvas_height=300, image=None, imgdata=None):
