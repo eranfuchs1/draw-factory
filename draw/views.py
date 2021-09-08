@@ -43,7 +43,7 @@ def test_api_view(request, format=None):
 @parser_classes([JSONParser])
 def test_api_get_view(request, format=None):
     img_converter = ImageConverter()
-    img_converter.put_image(list(Canvas.objects.all())[-1])
+    img_converter.put_image(Image.open(list(Canvas.objects.all())[-1].img))
     imgdata = img_converter.convert_to_imgdata()
     imgdata = img_converter.convert_list_to_dict(imgdata)
     return Response(imgdata)

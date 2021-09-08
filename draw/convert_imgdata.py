@@ -59,7 +59,7 @@ class ImageConverter(ListConverter):
         idx = 0
         for i in range(self.canvas_height):
             for j in range(self.canvas_width):
-                color = image.getpixel((j, i))
+                color = self.image.getpixel((j, i))
                 for index, value in enumerate(color):
                     imgdata[idx + index] = value
                 idx += 4

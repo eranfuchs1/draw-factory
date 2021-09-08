@@ -73,10 +73,18 @@ let load_imageData = (context) => {
 	xhttp.onreadystatechange = function() {
 		if (this.response)
 		{
-			_putImageData(context, this.response);
+			console.log(this.response);
+			imgData = context.createImageData(400, 300);
+			let idx = 0;
+			while (idx.toString() in this.response)
+			{
+				imgData.data[idx] = this.response[idx.toString()];
+				idx ++;
+			}
+			_putImageData(context, imgData);
 		}
 	};
-	xhttp.open("GET", "{% url api %}", true);
+	xhttp.open("GET", "{% url api_get %}", true);
 	xhttp.send();
 };
 let test_func = () => {
@@ -85,5 +93,12 @@ let test_func = () => {
 	canvas = document.getElementById("{{canvas_id}}");
 	context = canvas.getContext('2d');
 	store_imageData(_getImageData(context));
+};
+let test_func_load = () => {
+	let canvas;
+	let context;
+	canvas = document.getElementById("{{canvas_id}}");
+	context = canvas.getContext('2d');
+	load_imageData(context);
 };
 </script>
