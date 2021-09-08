@@ -66,6 +66,19 @@ const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 		xhttp.setRequestHeader("X-CSRFToken", csrftoken); 
 		xhttp.send(JSON.stringify(imgData.data));
 	};
+
+let load_imageData = (context) => {
+	let xhttp = new XMLHttpRequest();
+	xhttp.responseType = 'json';
+	xhttp.onreadystatechange = function() {
+		if (this.response)
+		{
+			_putImageData(context, this.response);
+		}
+	};
+	xhttp.open("GET", "{% url api %}", true);
+	xhttp.send();
+};
 let test_func = () => {
 	let canvas;
 	let context;
