@@ -1,55 +1,7 @@
 {% csrf_token %}
+{% include drawing_tool with canvas_id=canvas_id %}
 <script>
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    if (window.addEventListener) {
-        window.addEventListener('load', function() {
-            let canvas;
-            let context;
-
-            function init() {
-                canvas = document.getElementById("{{canvas_id}}");
-                if (!canvas) {
-                    return;
-                }
-
-                if (!canvas.getContext) {
-                    return;
-                }
-
-                context = canvas.getContext('2d');
-                if (!context) {
-                    return;
-                }
-                canvas.addEventListener('mousemove', ev_mousemove, false);
-            }
-
-            var started = false;
-
-            function ev_mousemove(ev) {
-                let x;
-                let y;
-
-                if (ev.layerX || ev.layerX == 0) { // Firefox
-                    x = ev.layerX;
-                    y = ev.layerY;
-                } else if (ev.offsetX || ev.offsetX == 0) { // Opera
-                    x = ev.offsetX;
-                    y = ev.offsetY;
-                }
-
-                if (!started) {
-                    context.beginPath();
-                    context.moveTo(x, y);
-                    started = true;
-                } else {
-                    context.lineTo(x, y);
-                    context.stroke();
-                }
-            }
-
-            init();
-        }, false);
-    }
 
     function _getImageData(context) {
         let imgData = context.getImageData(0, 0, 400, 300);
@@ -61,7 +13,7 @@ const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     }
 	let store_imageData = (imgData) => {
 		let xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "{% url api %}", true);
+		xhttp.open("POST", "{% url api drawing_tool_name %}", true);
 		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xhttp.setRequestHeader("X-CSRFToken", csrftoken); 
 		xhttp.send(JSON.stringify(imgData.data));
@@ -84,7 +36,7 @@ let load_imageData = (context) => {
 			_putImageData(context, imgData);
 		}
 	};
-	xhttp.open("GET", "{% url api_get %}", true);
+	xhttp.open("GET", "{% url api_get drawing_tool_name %}", true);
 	xhttp.send();
 };
 let test_func = () => {
