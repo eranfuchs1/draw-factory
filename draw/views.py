@@ -13,7 +13,7 @@ from PIL import Image
 
 @api_view(['POST'])
 @parser_classes([JSONParser])
-def test_api_view(request, format=None):
+def test_api_view(request):
     """
     A view that can accept POST requests with JSON content.
     """
@@ -41,7 +41,7 @@ def test_api_view(request, format=None):
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
-def test_api_get_view(request, format=None):
+def test_api_get_view(request):
     img_converter = ImageConverter()
     img_converter.put_image(Image.open(list(Canvas.objects.all())[-1].img))
     imgdata = img_converter.convert_to_imgdata()
