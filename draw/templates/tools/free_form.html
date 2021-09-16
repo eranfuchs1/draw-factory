@@ -18,12 +18,14 @@
                 if (!context) {
                     return;
                 }
+		context.strokeStyle = "{{strokeStyle}}";
                 canvas.addEventListener('mousemove', ev_mousemove, false);
             }
 
             var started = false;
 
             function ev_mousemove(ev) {
+		let boundingClientRect = canvas.getBoundingClientRect();
                 let x;
                 let y;
 
@@ -34,6 +36,8 @@
                     x = ev.offsetX;
                     y = ev.offsetY;
                 }
+		x -= boundingClientRect.x;
+		y -= boundingClientRect.y;
 
                 if (!started) {
                     context.beginPath();
