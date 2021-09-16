@@ -1,0 +1,36 @@
+<script>
+{% block js_variables %}
+{% endblock js_variables %}
+	setInterval(function () {
+		let canvas_containers = document.querySelectorAll(".canvas_container");
+		for (let canvas_container of canvas_containers)
+		{
+			{% comment %}for (let item of canvas_containers){% endcomment %}
+			{% comment %}{{% endcomment %}
+				{% comment %}if (item.children[0].id == "{{canvas_id}}"){% endcomment %}
+				{% comment %}{{% endcomment %}
+					{% comment %}canvas_container = item;{% endcomment %}
+				{% comment %}}{% endcomment %}
+			{% comment %}}{% endcomment %}
+			if (!canvas_container.style.marginLeft)
+			{
+				canvas_container.style.marginLeft = '0px';
+			}
+			let boundingClientRect = canvas_container.getBoundingClientRect();
+			let canvas_container_x = boundingClientRect.x + 1;
+			$(canvas_container).offset({ left: canvas_container_x });
+			if (false)
+			{
+				let marginLeft = canvas_container.style.marginLeft;
+				marginLeft.replace('px', '');
+				let canvas_container_x = parseInt(marginLeft);
+			}
+			{% block canvas_container_interval %}
+			{% endblock canvas_container_interval %}
+			if (false)
+			{
+				canvas_container.style.marginLeft = `${++canvas_container_x}px`;
+			}
+		}
+	}, 6);
+</script>

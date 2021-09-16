@@ -9,3 +9,4 @@ class DrawingTools(models.Model):
 class Canvas(models.Model):
     img = models.ImageField()
     last_tool = models.ForeignKey(DrawingTools, on_delete=models.CASCADE, null=True)
+    in_use = models.BooleanField(null=True)

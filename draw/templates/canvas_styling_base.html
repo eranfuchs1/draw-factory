@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'canvas_styling_css.html' %}
+<h2>Continue drawing worker!</h2>
+<div class="container">
+<div class="canvas_container">
+    {% include template_file_name %}
+</div>
+</div>
+{% endblock content %}
