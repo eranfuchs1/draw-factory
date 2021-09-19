@@ -11,6 +11,11 @@ from django.core.files.base import ContentFile
 from PIL import Image
 
 
+implement_menu_bar = True
+if implement_menu_bar:
+    implement_menu_bar_order_by = False
+
+
 @api_view(['POST'])
 @parser_classes([JSONParser])
 def test_api_view(request, drawing_tool, canvas_id=None):
@@ -41,6 +46,8 @@ def test_api_view(request, drawing_tool, canvas_id=None):
     canvas.last_tool = tool_model
     canvas.in_use = False
     canvas.save()
+    if False:
+        return Response({'success': 'True'})
     return Response({'received data': request.data})
 
 
@@ -73,6 +80,10 @@ def test_api_get_view(request, drawing_tool, using_canvas_id=None, using_in_use=
 
 
 def test_html_view(request, drawing_tool):
+    if implement_menu_bar:
+        drawing_tools = DrawingTools.objects.all()
+        if implement_menu_bar_order_by:
+            drawing_tools = drawing_tools.order_by(order)
     tool_model = DrawingTools.objects.get(tool=drawing_tool)
     tool_order = tool_model.order
     context = {
@@ -80,5 +91,21 @@ def test_html_view(request, drawing_tool):
             'drawing_tool': f'tools/{drawing_tool}.html',
             'drawing_tool_name': f'{drawing_tool}',
             'implement_conveyor_belt': 'True',
+            'implement_machine_box': 'False',
+            'implement_machine_box_right': 'False',
+            'other_tool': 'tools/rectangles_tool.js',
+            'implement_pop_by_position': 'False',
             }
+    if implement_menu_bar:
+        context['menu_bar_links_names'] = [drawing_tool.tool for drawing_tool in drawing_tools]
+        context['implement_menu_bar'] = 'True'
+        context['implement_flexbox'] = 'True'
+        context['implement_menu_bar_main_style'] = 'False'
+    if context['implement_pop_by_position'] == 'True':
+        context['implement_pop_by_position_left_based'] = 'False'
     return render(request, 'canvas_styling_for_conveyor_belt.html', context=context)
+
+
+def test_show_all_view(request):
+    context = {}
+    return render(request, 'show_all/index.html', context=context)

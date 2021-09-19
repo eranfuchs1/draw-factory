@@ -1,4 +1,22 @@
 <script>
+let pop_by_position;
+if ("{{implement_pop_by_position}}" == "True")
+{
+	pop_by_position = (canvas_container) => {
+		let outerWidth_adder = 0;
+		if ("{{implement_pop_by_position_left_based}}" == "True")
+		{
+		}
+		else
+		{
+			outerWidth_adder = $(canvas_container).outerWidth();
+		}
+		if ($(canvas_container).offset().left + outerWidth_adder >= $(window).innerWidth)
+		{
+			test_func(canvas_container.children[0]);
+		}
+	};
+}
 {% block js_variables %}
 {% endblock js_variables %}
 	setInterval(function () {
@@ -19,6 +37,10 @@
 			let boundingClientRect = canvas_container.getBoundingClientRect();
 			let canvas_container_x = boundingClientRect.x + 1;
 			$(canvas_container).offset({ left: canvas_container_x });
+			if ("{{implement_pop_by_position}}" == "True")
+			{
+				pop_by_position(canvas_container);
+			}
 			if (false)
 			{
 				let marginLeft = canvas_container.style.marginLeft;

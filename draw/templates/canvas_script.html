@@ -125,9 +125,14 @@ if ("{{implement_conveyor_belt}}" == "True")
 			test_func_load();
 		}
 		draw_func(canvas);
+		if ("{{implement_pop_by_position}}" == "True")
+		{}
+		else
+		{
 		setTimeout(() => {
 			test_func(canvas);
-		}, 9000)
+		}, 9000);
+		}
 	}, 4000);
 }
 </script>

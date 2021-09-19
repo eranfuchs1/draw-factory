@@ -34,8 +34,15 @@ if ("{{implement_conveyor_belt}}" == "True")
                     context.moveTo(x, y);
                     started = true;
                 } else {
+			if ("{{implement_other_tools}}" == "True")
+			{
+				{% include other_tool %}
+			}
+			else
+			{
                     context.lineTo(x, y);
                     context.stroke();
+			}
                 }
             }
 			let context;

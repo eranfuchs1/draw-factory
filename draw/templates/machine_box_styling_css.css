@@ -1,0 +1,22 @@
+.machine_box {
+	color: red;
+	position: fixed;
+	z-index: 10;
+	height: 400px;
+	width: 400px;
+	background-color: grey;
+}
+.canvas_container {
+	margin-top: 50px;
+}
+{% if implement_machine_box_right == 'True' %}
+.machine_box_right {
+	color: red;
+	position: fixed;
+	z-index: 10;
+	height: 400px;
+	width: 400px;
+	background-color: grey;
+	margin-right: 0px;
+}
+{% endif %}

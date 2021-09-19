@@ -3,6 +3,9 @@
 {% block content %}
 {% include 'canvas_styling_css.html' %}
 <h2>Continue drawing worker!</h2>
+{% if implement_machine_box == 'True' %}
+{% include 'machine_box.html' %}
+{% endif %}
 <div class="container">
 <div class="canvas_container">
     {% include template_file_name %}
