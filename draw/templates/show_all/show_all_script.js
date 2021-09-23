@@ -4,6 +4,7 @@ if ("{{implement_tabular_design}}" == "True")
 let canvas_ids;
 let get_canvas_ids;
 let canvas_generator_by_ids;
+let load_imageData;
 if ("{{implement_fetch_ids}}" == "True")
 {
     canvas_generator_by_ids = (canvas_ids) => {
@@ -46,10 +47,10 @@ if ("{{implement_fetch_ids}}" == "True")
                 }
             }
         };
-        xhttp.open("GET", "{% url test_api_get_ids_last_tool %}", true);
+        xhttp.open("GET", "{% url 'test_api_get_ids_last_tool' %}", true);
         xhttp.send();
     };
-    let load_imageData = (context, canvas_id) => {
+    load_imageData = (context, canvas_id) => {
         let xhttp = new XMLHttpRequest();
         xhttp.responseType = 'json';
         xhttp.onreadystatechange = function() {
@@ -71,10 +72,10 @@ if ("{{implement_fetch_ids}}" == "True")
                     imgData.data[idx] = res_obj[idx.toString()];
                     idx ++;
                 }
-                _putImageData(context, imgData);
+                context.putImageData(imgData, 0, 0);
             }
         };
-        xhttp.open("GET", `{% url 'test_api_get_by_id' drawing_tool 'False' 'False' %}${canvas_id}/`, true);
+        xhttp.open("GET", `{% url 'test_api_get' drawing_tool 'False' 'False' %}${canvas_id}/`, true);
         xhttp.send();
     };
 }
