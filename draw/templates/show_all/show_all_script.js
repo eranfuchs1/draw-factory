@@ -29,6 +29,13 @@ let canvas_generator_by_ids = (canvas_ids) => {
             let canvas_id = canvas_ids[i];
         }
     }
+    else
+    {
+        for (let canvas_id of canvas_ids)
+        {
+            make_new_canvas(canvas_id);
+        }
+    }
 };
 get_canvas_ids = () => {
     let xhttp = new XMLHttpRequest();
