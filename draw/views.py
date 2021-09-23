@@ -53,7 +53,7 @@ def test_api_view(request, drawing_tool, canvas_id=None):
 
 @api_view(['GET'])
 @parser_classes([JSONParser])
-def test_api_get_view(request, drawing_tool, using_canvas_id=None, using_in_use=None):
+def test_api_get_view(request, drawing_tool, using_canvas_id=None, using_in_use=None, canvas_id=None):
     tool_model = DrawingTools.objects.get(tool=drawing_tool)
     last_tool = DrawingTools.objects.get(order=tool_model.order - 1)
     img_converter = ImageConverter()
@@ -69,6 +69,9 @@ def test_api_get_view(request, drawing_tool, using_canvas_id=None, using_in_use=
                 break
         if not found:
             return HttpResponse(Http404())
+    elif canvas_id:
+        image_object = Canvas.objects.get(id=canvas_id)
+        img_converter.put_image(Image.open(image_object.img))
     else:
         image_object = list(Canvas.objects.filter(last_tool=last_tool))[-1]
         img_converter.put_image(Image.open(image_object.img))

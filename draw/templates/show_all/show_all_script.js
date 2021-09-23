@@ -49,4 +49,32 @@ if ("{{implement_fetch_ids}}" == "True")
         xhttp.open("GET", "{% url test_api_get_ids_last_tool %}", true);
         xhttp.send();
     };
+    let load_imageData = (context, canvas_id) => {
+        let xhttp = new XMLHttpRequest();
+        xhttp.responseType = 'json';
+        xhttp.onreadystatechange = function() {
+            if (this.response)
+            {
+                console.log(this.response);
+                let imgData = context.createImageData(400, 300);
+                let res_obj;
+                if ('canvas_id' in this.response)
+                {
+                    res_obj = this.response['imgdata'];
+                }
+                else {
+                    res_obj = this.response;
+                }
+                let idx = 0;
+                while (idx.toString() in res_obj)
+                {
+                    imgData.data[idx] = res_obj[idx.toString()];
+                    idx ++;
+                }
+                _putImageData(context, imgData);
+            }
+        };
+        xhttp.open("GET", `{% url api_get drawing_tool 'False' 'False' %}${canvas_id}/`, true);
+        xhttp.send();
+    };
 }
