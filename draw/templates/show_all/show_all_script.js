@@ -33,8 +33,38 @@ let canvas_generator_by_ids = (canvas_ids) => {
         {
             let canvas_container = make_new_canvas(canvas_id);
             document.body.appendChild(canvas_container);
+            let context = canvas_container.children[0].getContext('2d');
+            load_imageData(context, canvas_container.children[0].id);
         }
     }
+};
+load_imageData = (context, canvas_id) => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.responseType = 'json';
+    xhttp.onreadystatechange = function() {
+        if (this.response)
+        {
+            console.log(this.response);
+            let imgData = context.createImageData(400, 300);
+            let res_obj;
+            if ('canvas_id' in this.response)
+            {
+                res_obj = this.response['imgdata'];
+            }
+            else {
+                res_obj = this.response;
+            }
+            let idx = 0;
+            while (idx.toString() in res_obj)
+            {
+                imgData.data[idx] = res_obj[idx.toString()];
+                idx ++;
+            }
+            context.putImageData(imgData, 0, 0);
+        }
+    };
+    xhttp.open("GET", `{% url 'test_api_get' drawing_tool 'False' 'False' %}${canvas_id}/`, true);
+    xhttp.send();
 };
 get_canvas_ids = () => {
     let xhttp = new XMLHttpRequest();
@@ -48,36 +78,6 @@ get_canvas_ids = () => {
                 canvas_generator_by_ids(canvas_ids);
             }
         };
-        xhttp.open("GET", "{% url 'test_api_get_ids_last_tool' %}", true);
-        xhttp.send();
-    };
-    load_imageData = (context, canvas_id) => {
-        let xhttp = new XMLHttpRequest();
-        xhttp.responseType = 'json';
-        xhttp.onreadystatechange = function() {
-            if (this.response)
-            {
-                console.log(this.response);
-                let imgData = context.createImageData(400, 300);
-                let res_obj;
-                if ('canvas_id' in this.response)
-                {
-                    res_obj = this.response['imgdata'];
-                }
-                else {
-                    res_obj = this.response;
-                }
-                let idx = 0;
-                while (idx.toString() in res_obj)
-                {
-                    imgData.data[idx] = res_obj[idx.toString()];
-                    idx ++;
-                }
-                context.putImageData(imgData, 0, 0);
-            }
-        };
-        xhttp.open("GET", `{% url 'test_api_get' drawing_tool 'False' 'False' %}${canvas_id}/`, true);
-        xhttp.send();
     };
     xhttp.open("GET", "{% url 'test_api_get_ids_last_tool' %}", true);
     xhttp.send();
