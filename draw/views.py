@@ -13,7 +13,7 @@ from PIL import Image
 
 implement_menu_bar = True
 if implement_menu_bar:
-    implement_menu_bar_order_by = False
+    implement_menu_bar_order_by = True 
 
 
 @api_view(['POST'])
@@ -68,7 +68,7 @@ def test_api_get_view(request, drawing_tool, using_canvas_id=None, using_in_use=
                 image_object = canvas_object
                 break
         if not found:
-            return Http404()
+            return HttpResponse(Http404())
     else:
         image_object = list(Canvas.objects.filter(last_tool=last_tool))[-1]
         img_converter.put_image(Image.open(image_object.img))
@@ -83,7 +83,7 @@ def test_html_view(request, drawing_tool):
     if implement_menu_bar:
         drawing_tools = DrawingTools.objects.all()
         if implement_menu_bar_order_by:
-            drawing_tools = drawing_tools.order_by(order)
+            drawing_tools = drawing_tools.order_by('order')
     tool_model = DrawingTools.objects.get(tool=drawing_tool)
     tool_order = tool_model.order
     context = {
@@ -91,10 +91,10 @@ def test_html_view(request, drawing_tool):
             'drawing_tool': f'tools/{drawing_tool}.html',
             'drawing_tool_name': f'{drawing_tool}',
             'implement_conveyor_belt': 'True',
-            'implement_machine_box': 'False',
-            'implement_machine_box_right': 'False',
+            'implement_machine_box': 'True',
+            'implement_machine_box_right': 'True',
             'other_tool': 'tools/rectangles_tool.js',
-            'implement_pop_by_position': 'False',
+            'implement_pop_by_position': 'True',
             }
     if implement_menu_bar:
         context['menu_bar_links_names'] = [drawing_tool.tool for drawing_tool in drawing_tools]
@@ -109,3 +109,16 @@ def test_html_view(request, drawing_tool):
 def test_show_all_view(request):
     context = {}
     return render(request, 'show_all/index.html', context=context)
+
+@api_view(['GET'])
+@parser_classes([JSONParser])
+def test_api_get_ids_view(request, drawing_tool=None):
+    if drawing_tool:
+        last_tool = DrawingTools.objects.get(tool=drawing_tool)
+    else:
+        last_tool = DrawingTools.objects.all().order_by('order').last()
+    canvas_objects = Canvas.objects.filter(last_tool=last_tool)
+    context = {'canvas_ids':[]}
+    for index, canvas_object in enumerate(canvas_objects):
+        context['canvas_ids'].append(canvas_object.id)
+    return Response(context)

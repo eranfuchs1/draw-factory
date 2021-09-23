@@ -17,6 +17,6 @@
 	height: 400px;
 	width: 400px;
 	background-color: grey;
-	margin-right: 0px;
+	margin-left: calc(100% - 400px);
 }
 {% endif %}

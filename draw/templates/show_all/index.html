@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if implement_show_all_fetch_ids %}
+{% for canvas_id in canvas_ids %}
+{% endfor %}
+{% endif %}
+
+
 {% endblock content %}

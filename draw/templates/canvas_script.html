@@ -1,5 +1,7 @@
 {% csrf_token %}
+{% if drawing_tool %}
 {% include drawing_tool with canvas_id=canvas_id implement_conveyor_belt=implement_conveyor_belt %}
+{% endif %}
 <script>
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 

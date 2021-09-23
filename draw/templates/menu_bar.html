@@ -4,11 +4,11 @@
 </style>
 <ul class="menu_bar {% if implement_menu_bar_main_style == 'True' %}main{% endif %}">
 {% for tool_name in menu_bar_links_names %}
-<li>
-	<a href="{% url 'test_html' tool_name %}">
+<a href="{% url 'test_html' tool_name %}">
+	<div>
 		{{ tool_name }}
-	</a>
-</li>
+	</div>
+</a>
 {% endfor %}
 </ul>
 {% endif %}

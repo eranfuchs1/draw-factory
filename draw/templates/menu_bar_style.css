@@ -8,9 +8,30 @@
 	display: inline-block;
 	{% endif %}
 	list-style-type: none;
+	background-color: white;
+	margin-top: 0px;
 }
 {% if implement_flexbox == 'True' %}
-.menu_bar li {
+.menu_bar a {
 	flex: 3;
+	text-align: center;
+	padding-top: 6px;
+	padding-bottom: 6px;
 }
+.menu_bar a:hover {
+	animation-name: example;
+	animation-duration: 600ms;
+	background-color: salmon;
+}
+
 {% endif %}	
+
+@keyframes example {
+	0% {background-color: white;}
+	100% {background-color: salmon;}
+}
+
+@keyframes white {
+	0% {background-color: salmon;}
+	100% {background-color: white;}
+}
