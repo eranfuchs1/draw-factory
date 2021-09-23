@@ -1,0 +1,8 @@
+.container {
+    background-color: gray;
+}
+
+.canvas_container {
+    display: inline-block;
+    margin-right: 50px;
+}
