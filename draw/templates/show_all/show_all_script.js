@@ -49,6 +49,6 @@ get_canvas_ids = () => {
             }
         }
     };
-    xhttp.open("GET", "{% url test_api_get_ids_last_tool %}", true);
+    xhttp.open("GET", "{% url 'test_api_get_ids_last_tool' %}", true);
     xhttp.send();
 };
