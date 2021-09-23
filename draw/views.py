@@ -108,6 +108,8 @@ def test_html_view(request, drawing_tool):
 
 def test_show_all_view(request):
     context = {}
+    drawing_tools = DrawingTools.objects.all().order_by('order')
+    context['drawing_tool'] = drawing_tools.last().tool
     return render(request, 'show_all/index.html', context=context)
 
 @api_view(['GET'])
