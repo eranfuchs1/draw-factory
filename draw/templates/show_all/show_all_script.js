@@ -20,14 +20,14 @@ let canvas_generator_by_ids = (canvas_ids) => {
     if ("{{implement_pages}}" == "True")
     {
         page_num = parseInt("{{page_num}}");
-    }
-    for (let i = page_num; i < page_num + 10; i++)
-    {
-        if (i >= canvas_ids.length)
+        for (let i = page_num; i < page_num + 10; i++)
         {
-            break;
+            if (i >= canvas_ids.length)
+            {
+                break;
+            }
+            let canvas_id = canvas_ids[i];
         }
-        let canvas_id = canvas_ids[i];
     }
 };
 get_canvas_ids = () => {
