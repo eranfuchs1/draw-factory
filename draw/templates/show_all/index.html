@@ -6,10 +6,8 @@
 {% endfor %}
 {% endif %}
 
-<canvas width="400" height="300" id="216"></canvas>
 <script>
     {% include 'show_all/show_all_script.js' with implement_fetch_ids='True' %}
-    load_imageData(document.getElementById("216").getContext('2d'), 216);
 </script>
 
 {% endblock content %}
