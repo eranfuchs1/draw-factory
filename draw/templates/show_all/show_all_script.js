@@ -74,7 +74,7 @@ if ("{{implement_fetch_ids}}" == "True")
                 _putImageData(context, imgData);
             }
         };
-        xhttp.open("GET", `{% url api_get drawing_tool 'False' 'False' %}${canvas_id}/`, true);
+        xhttp.open("GET", `{% url 'test_api_get_by_id' drawing_tool 'False' 'False' %}${canvas_id}/`, true);
         xhttp.send();
     };
 }
