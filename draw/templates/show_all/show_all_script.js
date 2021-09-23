@@ -33,7 +33,8 @@ let canvas_generator_by_ids = (canvas_ids) => {
     {
         for (let canvas_id of canvas_ids)
         {
-            make_new_canvas(canvas_id);
+            let canvas_container = make_new_canvas(canvas_id);
+            document.body.appendChild(canvas_container);
         }
     }
 };
