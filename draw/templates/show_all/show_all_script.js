@@ -11,9 +11,7 @@ let make_new_canvas = (canvas_id) => {
     canvas_container = document.createElement("div");
     canvas_container.setAttribute("class", "canvas_container");
     canvas_container.appendChild(canvas);
-    document.querySelector(".container").appendChild(canvas_container);
-    $(canvas_container).offset({left:0});
-    return canvas;
+    return canvas_container;
 };
 let canvas_generator_by_ids = (canvas_ids) => {
     let page_num = 0;
