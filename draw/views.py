@@ -109,10 +109,12 @@ def test_html_view(request, drawing_tool):
     return render(request, 'canvas_styling_for_conveyor_belt.html', context=context)
 
 
-def test_show_all_view(request):
+def test_show_all_view(request, page_number=None):
     context = {}
     drawing_tools = DrawingTools.objects.all().order_by('order')
     context['drawing_tool'] = drawing_tools.last().tool
+    if page_number:
+        context['page_number'] = page_number
     return render(request, 'show_all/index.html', context=context)
 
 @api_view(['GET'])
