@@ -15,27 +15,18 @@ let make_new_canvas = (canvas_id) => {
 };
 let canvas_generator_by_ids = (canvas_ids) => {
     let page_num = 0;
-    if ("{{implement_pages}}" == "True")
+    page_num = {{page_number}};
+    for (let i = page_num * 10; i < (page_num * 10) + 10; i++)
     {
-        page_num = parseInt("{{page_num}}");
-        for (let i = page_num; i < page_num + 10; i++)
+        if (i >= canvas_ids.length)
         {
-            if (i >= canvas_ids.length)
-            {
-                break;
-            }
-            let canvas_id = canvas_ids[i];
+            break;
         }
-    }
-    else
-    {
-        for (let canvas_id of canvas_ids)
-        {
-            let canvas_container = make_new_canvas(canvas_id);
-            document.body.appendChild(canvas_container);
-            let context = canvas_container.children[0].getContext('2d');
-            load_imageData(context, canvas_container.children[0].id);
-        }
+        let canvas_id = canvas_ids[i];
+        let canvas_container = make_new_canvas(canvas_id);
+        document.body.appendChild(canvas_container);
+        let context = canvas_container.children[0].getContext('2d');
+        load_imageData(context, canvas_container.children[0].id);
     }
 };
 load_imageData = (context, canvas_id) => {
