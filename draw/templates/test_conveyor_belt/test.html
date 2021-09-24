@@ -79,7 +79,9 @@ if ("{{implement_pop_by_position}}" == "True")
 			}
 		}
 	}, 6);
-	for (let i = 0; i <= 2000; i += 100)
+	let machine_box_container = document.querySelector('.machine_box_container');
+	let machine_box_container_width = $(machine_box_container).width();
+	for (let i = 0; i <= machine_box_container_width; i += 100)
 	{
 		add_conveyor_plate();
 	}
