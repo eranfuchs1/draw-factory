@@ -8,6 +8,7 @@ let add_conveyor_plate = () => {
 	let conveyor_plate = document.createElement('div');
 	conveyor_plate.setAttribute('class', 'conveyor_plate');
 	document.querySelector('.machine_box_container').appendChild(conveyor_plate);
+	return conveyor_plate;
 };
 if ("{{implement_pop_by_position}}" == "True")
 {
@@ -78,7 +79,7 @@ if ("{{implement_pop_by_position}}" == "True")
 			}
 		}
 	}, 6);
-	for (let i = 350; i <= window.innerWidth; i += 50)
+	for (let i = 0; i <= 2000; i += 100)
 	{
 		add_conveyor_plate();
 	}
