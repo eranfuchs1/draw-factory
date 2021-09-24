@@ -1,6 +1,11 @@
 <script>
 let pop_by_position;
 let speed = 1;
+let add_conveyor_plate = () => {
+	let conveyor_plate = document.createElement('div');
+	conveyor_plate.setAttribute('class', 'conveyor_plate');
+	document.querySelector('.machine_box').appendChild(conveyor_plate);
+};
 if ("{{implement_pop_by_position}}" == "True")
 {
 	pop_by_position = (canvas_container) => {
