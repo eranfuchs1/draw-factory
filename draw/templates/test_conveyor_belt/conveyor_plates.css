@@ -1,6 +1,10 @@
 .conveyor_plate {
-    position: absolute;
+    position:relative;
+    display: inline-block;
     z-index: -1;
-    width: 50px;
-    height: 400px;
+    width: 53px;
+    height: 390px;
+    background-color: darkgray;
+    border: 5px dashed orange;
+    top: 0px;
 }
