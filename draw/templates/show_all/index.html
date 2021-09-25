@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-
+<style>
+{% include 'show_all/show_all_style.css' %}
+</style>
 {% block content %}
 {% if implement_show_all_fetch_ids %}
 {% for canvas_id in canvas_ids %}
