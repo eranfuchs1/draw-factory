@@ -1,4 +1,11 @@
 <script>
+let mouse_down = false;
+document.body.addEventListener('mousedown', (ev) => {
+    mouse_down = true;
+});
+document.body.addEventListener('mouseup', (ev) => {
+    mouse_down = false;
+});
 let draw_func;
 if ("{{implement_conveyor_belt}}" == "True")
 	    {
@@ -6,6 +13,11 @@ if ("{{implement_conveyor_belt}}" == "True")
             var started = false;
 
             function ev_mousemove(ev) {
+                if (!mouse_down)
+                {
+                    started = false;
+                    return;
+                }
 		let canvas = ev.target || ev.srcElement;
 		let context = canvas.getContext("2d");
 		    let offset;
