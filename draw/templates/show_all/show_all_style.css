@@ -9,3 +9,47 @@
     width: fit-content;
     height: fit-content;
 }
+
+.active {
+    background-color: darkgray;
+}
+
+.page_number_navigation_container_container {
+    text-align: center;
+}
+
+
+.page_number_navigation_container_container>.page_number_navigation_container {
+    display: inline-block;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-right: orange;
+    border-left: orange;
+}
+.page_number_navigation_container {
+    background-color: orange;
+}
+.page_number_navigation_container>div {
+    display: inline-block;
+}
+.page_number_navigation_container>a:hover {
+    animation-name: page_number;
+    animation-duration: 200ms;
+    animation-fill-mode: forwards;
+}
+
+.page_number_navigation_container>div>a:hover {
+    animation-name: page_number;
+    animation-duration: 200ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes page_number {
+    0% {}
+    100% {background-color: gray;}
+}
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
