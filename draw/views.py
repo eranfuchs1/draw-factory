@@ -114,6 +114,8 @@ def test_show_all_view(request, page_number=None, canvas_count=None):
     drawing_tools = DrawingTools.objects.all().order_by('order')
     context['drawing_tool'] = drawing_tools.last().tool
     context['page_number'] = page_number
+    context['page_number_next'] = page_number + 1
+    context['page_number_previous'] = page_number - 1 if page_number > 0 else page_number
     context['canvas_count'] = 10 if canvas_count == None else canvas_count
     return render(request, 'show_all/index.html', context=context)
 
