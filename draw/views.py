@@ -119,8 +119,13 @@ def test_show_all_view(request, page_number=None, canvas_count=None):
     else:
         for i in range(page_number - 5, page_number + 5):
             page_numbers.append(i)
+    last_tool = DrawingTools.objects.all().order_by('order').last()
+    canvas_objects = Canvas.objects.filter(last_tool=last_tool)
     first_page_number = 0
-    last_page_number = 0
+    canvas_count = 10 if canvas_count == None else canvas_count
+    last_page_number = int(canvas_objects.count() / canvas_count)
+    context['last_page_number'] = last_page_number
+    context['first_page_number'] = first_page_number
     context['drawing_tool'] = drawing_tools.last().tool
     context['page_numbers'] = page_numbers
     context['page_number'] = page_number

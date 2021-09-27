@@ -1,5 +1,6 @@
 <div class="page_number_navigation_container">
 <!-- previous and next buttons -->
+<a href="{% url 'test_html_show_all_pages' first_page_number %}">first</a>
 <a href="{% url 'test_html_show_all_pages' page_number_previous %}">previous</a>
 <div class="numbers_container">
     {% for num in page_numbers %}
@@ -7,4 +8,5 @@
     {% endfor %}
 </div>
 <a href="{% url 'test_html_show_all_pages' page_number_next %}">next</a>
+<a href="{% url 'test_html_show_all_pages' last_page_number %}">last</a>
 </div>
