@@ -112,7 +112,17 @@ def test_html_view(request, drawing_tool):
 def test_show_all_view(request, page_number=None, canvas_count=None):
     context = {}
     drawing_tools = DrawingTools.objects.all().order_by('order')
+    page_numbers = []
+    if page_number < 5:
+        for i in range(10):
+            page_numbers.append(i)
+    else:
+        for i in range(page_number - 5, page_number + 5):
+            page_numbers.append(i)
+    first_page_number = 0
+    last_page_number = 0
     context['drawing_tool'] = drawing_tools.last().tool
+    context['page_numbers'] = page_numbers
     context['page_number'] = page_number
     context['page_number_next'] = page_number + 1
     context['page_number_previous'] = page_number - 1 if page_number > 0 else page_number
