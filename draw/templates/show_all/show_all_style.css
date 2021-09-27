@@ -1,0 +1,11 @@
+.container {
+    background-color: gray;
+}
+
+.canvas_container {
+    position: relative;
+    display: inline-block;
+    margin-right: 50px;
+    width: fit-content;
+    height: fit-content;
+}

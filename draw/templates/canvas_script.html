@@ -82,7 +82,7 @@ let test_func = (canvas=null) => {
 	store_imageData(_getImageData(context), canvas);
 	if (true)
 	{
-		document.querySelector('.container').removeChild(canvas_container);
+		document.querySelector('.machine_box_container').removeChild(canvas_container);
 		canvas.remove();
 		canvas_container.remove();
 	}
@@ -112,7 +112,7 @@ let make_new_canvas = () => {
 	canvas_container = document.createElement("div");
 	canvas_container.setAttribute("class", "canvas_container");
 	canvas_container.appendChild(canvas);
-	document.querySelector(".container").appendChild(canvas_container);
+	document.querySelector(".machine_box_container").appendChild(canvas_container);
 	$(canvas_container).offset({left:0});
 	return canvas;
 };

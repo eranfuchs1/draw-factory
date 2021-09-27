@@ -1,6 +1,15 @@
+<style>
+	{% include 'test_conveyor_belt/conveyor_plates.css' %}
+</style>
 <script>
 let pop_by_position;
 let speed = 1;
+let add_conveyor_plate = () => {
+	let conveyor_plate = document.createElement('div');
+	conveyor_plate.setAttribute('class', 'conveyor_plate');
+	document.querySelector('.machine_box_container').appendChild(conveyor_plate);
+	return conveyor_plate;
+};
 if ("{{implement_pop_by_position}}" == "True")
 {
 	pop_by_position = (canvas_container) => {
@@ -21,6 +30,17 @@ if ("{{implement_pop_by_position}}" == "True")
 {% block js_variables %}
 {% endblock js_variables %}
 	setInterval(function () {
+		let conveyor_plates = document.querySelectorAll(".conveyor_plate");
+		for (let conveyor_plate of conveyor_plates)
+		{
+			let boundingClientRect = conveyor_plate.getBoundingClientRect();
+			let conveyor_plate_x = boundingClientRect.x + speed;
+			if (conveyor_plate_x >= window.innerWidth)
+			{
+				conveyor_plate_x = 0;
+			}
+			$(conveyor_plate).offset({ left: conveyor_plate_x });
+		}
 		let canvas_containers = document.querySelectorAll(".canvas_container");
 		for (let canvas_container of canvas_containers)
 		{
@@ -59,4 +79,10 @@ if ("{{implement_pop_by_position}}" == "True")
 			}
 		}
 	}, 6);
+	let machine_box_container = document.querySelector('.machine_box_container');
+	let machine_box_container_width = $(machine_box_container).width();
+	for (let i = 0; i <= machine_box_container_width; i += 100)
+	{
+		add_conveyor_plate();
+	}
 </script>

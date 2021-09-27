@@ -1,3 +1,11 @@
+.machine_box_container {
+	position: fixed;
+	height: 400px;
+	width: 2000px;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	background-color: orange;
+}
 .machine_box {
 	color: red;
 	position: fixed;

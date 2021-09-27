@@ -12,4 +12,5 @@ urlpatterns = [
     path('test_api_get_ids/', test_api_get_ids_view, name='test_api_get_ids_last_tool'),
     path('test_html_show_all/', test_show_all_view, name='test_html_show_all'),
     path('test_html_show_all/<int:page_number>/', test_show_all_view, name='test_html_show_all_pages'),
+    path('test_html_show_all/<int:page_number>/<int:canvas_count>/', test_show_all_view, name='test_html_show_all_pages_canvas_count'),
 ]

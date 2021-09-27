@@ -16,7 +16,7 @@ let make_new_canvas = (canvas_id) => {
 let canvas_generator_by_ids = (canvas_ids) => {
     let page_num = 0;
     page_num = {{page_number}};
-    for (let i = page_num * 10; i < (page_num * 10) + 10; i++)
+    for (let i = page_num * {{canvas_count}}; i < (page_num * {{canvas_count}}) + {{canvas_count}}; i++)
     {
         if (i >= canvas_ids.length)
         {
