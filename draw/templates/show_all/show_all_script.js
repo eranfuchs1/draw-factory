@@ -24,7 +24,7 @@ let canvas_generator_by_ids = (canvas_ids) => {
         }
         let canvas_id = canvas_ids[i];
         let canvas_container = make_new_canvas(canvas_id);
-        document.body.appendChild(canvas_container);
+        document.body.querySelector(".container").appendChild(canvas_container);
         let context = canvas_container.children[0].getContext('2d');
         load_imageData(context, canvas_container.children[0].id);
     }
