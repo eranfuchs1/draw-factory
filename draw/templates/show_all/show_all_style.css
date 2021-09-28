@@ -1,16 +1,23 @@
 .container {
     background-color: gray;
+    margin: 60px auto;
+    width: 85%;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(500px, 1fr) );
 }
 
 body {
     background-color: gray;
 }
 
+.canvas_container_row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
 .canvas_container {
-    position: relative;
-    display: inline-block;
-    margin-left: 50px;
-    margin-top: 40px;
+    margin: 20px auto;
     width: fit-content;
     height: fit-content;
     background-color: white;
