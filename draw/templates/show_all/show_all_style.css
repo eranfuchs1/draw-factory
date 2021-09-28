@@ -10,17 +10,17 @@ body {
     background-color: gray;
 }
 
-.canvas_container_row {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-}
-
 .canvas_container {
-    margin: 20px auto;
+    position: relative;
+    margin: 30px auto;
     width: fit-content;
     height: fit-content;
     background-color: white;
+}
+
+.canvas_container:hover {
+    border-left: 10px solid orange;
+    left: 5px;
 }
 
 .active {
@@ -29,15 +29,14 @@ body {
 
 .page_number_navigation_container_container {
     text-align: center;
-    margin-top: 30px;
+    margin: 30px auto;
 }
 
 
 .page_number_navigation_container_container>.page_number_navigation_container {
     display: inline-block;
     border-radius: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0px 10px;
     border-right: orange;
     border-left: orange;
 }
