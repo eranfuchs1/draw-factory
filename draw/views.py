@@ -107,6 +107,7 @@ def test_html_view(request, drawing_tool):
             }
     if implement_menu_bar:
         context['menu_bar_links_names'] = [drawing_tool.tool for drawing_tool in drawing_tools]
+        # context['menu_bar_links_names'] += ['show_all']
         context['implement_menu_bar'] = 'True'
         context['implement_flexbox'] = 'True'
         context['implement_menu_bar_main_style'] = 'False'
