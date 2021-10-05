@@ -9,6 +9,7 @@ from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.base import ContentFile
 from PIL import Image
+from PIL import ImageChops
 
 
 implement_menu_bar = True
@@ -39,6 +40,11 @@ def test_api_view(request, drawing_tool, canvas_id=None):
         last_tool = DrawingTools.objects.get(order=tool_model.order - 1)
         canvas = Canvas.objects.get(last_tool=last_tool)
     buffer = BytesIO()
+    if not ImageChops.difference(image, Image.open(canvas.img)).getbbox():
+        print("image hasn't been tempered with")
+        canvas.in_use = False
+        canvas.save()
+        return Response({'success': "False: image hasn't been worked on!"})
     image.save(fp=buffer, format='PNG')
     content_file = ContentFile(buffer.getvalue())
     img_name = 'default.png'
