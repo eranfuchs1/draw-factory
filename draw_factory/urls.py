@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from draw.views import landing_page_redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('draw/', include('draw.urls')),
+    path('', landing_page_redirect, name='landing_page_redirect'),
+    path('draw/', include('draw.urls'), name='draw'),
 ]

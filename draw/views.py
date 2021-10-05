@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, Http404
+from django.shortcuts import render, HttpResponse, Http404, redirect, HttpResponseRedirect, reverse
 from rest_framework.decorators import api_view
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import JSONParser
@@ -15,6 +15,12 @@ implement_menu_bar = True
 if implement_menu_bar:
     implement_menu_bar_order_by = True 
 
+def test_html_redirect(request):
+    return redirect('test_html', 'free_form')
+
+def landing_page_redirect(request):
+    # return HttpResponseRedirect(reverse('draw'))
+    return redirect('/draw/')
 
 @api_view(['POST'])
 @parser_classes([JSONParser])
