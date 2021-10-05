@@ -139,6 +139,11 @@ def test_show_all_view(request, page_number=None, canvas_count=None):
                 page_numbers.append(i)
 
     first_page_number = 0
+    context['menu_bar_links_names'] = [drawing_tool.tool for drawing_tool in drawing_tools]
+    # context['menu_bar_links_names'] += ['show_all']
+    context['implement_menu_bar'] = 'True'
+    context['implement_flexbox'] = 'True'
+    context['implement_menu_bar_main_style'] = 'False'
     context['last_page_number'] = last_page_number
     context['first_page_number'] = first_page_number
     context['drawing_tool'] = drawing_tools.last().tool
