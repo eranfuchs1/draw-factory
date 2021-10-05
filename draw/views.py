@@ -40,7 +40,11 @@ def test_api_view(request, drawing_tool, canvas_id=None):
         last_tool = DrawingTools.objects.get(order=tool_model.order - 1)
         canvas = Canvas.objects.get(last_tool=last_tool)
     buffer = BytesIO()
-    if not ImageChops.difference(image, Image.open(canvas.img)).getbbox():
+    if tool_model.order == 1:
+        if not image.getbbox():
+            print("image hasn't been tempered with")
+            return Response({'success': "False: image hasn't been worked on!"})
+    elif not ImageChops.difference(image, Image.open(canvas.img)).getbbox():
         print("image hasn't been tempered with")
         canvas.in_use = False
         canvas.save()
