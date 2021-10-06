@@ -1,5 +1,6 @@
 <script>
 let mouse_down = false;
+let tempered = false;
 document.body.addEventListener('mousedown', (ev) => {
     mouse_down = true;
 });
@@ -20,6 +21,7 @@ if ("{{implement_conveyor_belt}}" == "True")
                     started = false;
                     return;
                 }
+                tempered = true;
 		let canvas = ev.target || ev.srcElement;
 		let context = canvas.getContext("2d");
 		    let offset;

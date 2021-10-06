@@ -85,7 +85,7 @@ let test_func = (canvas=null) => {
 	}
 	canvas_container = canvas.parentNode;
 	context = canvas.getContext("2d");
-	if (!isCanvasBlank(canvas)) {
+	if (!isCanvasBlank(canvas) && tempered) {
 		store_imageData(_getImageData(context), canvas);
 	}
 	if (true)
