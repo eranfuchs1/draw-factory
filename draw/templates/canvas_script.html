@@ -66,6 +66,12 @@ let load_imageData = (context, canvas=null) => {
 	xhttp.open("GET", "{% url api_get drawing_tool_name 'True' 'True' %}", true);
 	xhttp.send();
 };
+
+function isCanvasBlank(canvas) {
+  return !canvas.getContext('2d')
+    .getImageData(0, 0, canvas.width, canvas.height).data
+    .some(channel => channel !== 0);
+}
 let test_func = (canvas=null) => {
 	let context;
 	let canvas_container;
@@ -79,7 +85,9 @@ let test_func = (canvas=null) => {
 	}
 	canvas_container = canvas.parentNode;
 	context = canvas.getContext("2d");
-	store_imageData(_getImageData(context), canvas);
+	if (!isCanvasBlank(canvas)) {
+		store_imageData(_getImageData(context), canvas);
+	}
 	if (true)
 	{
 		document.querySelector('.machine_box_container').removeChild(canvas_container);
