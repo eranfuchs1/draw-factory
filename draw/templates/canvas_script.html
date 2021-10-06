@@ -110,6 +110,11 @@ let test_func_load = () => {
 let make_new_canvas = () => {
 	if (document.querySelectorAll(".{{canvas_id}}").length != 0)
 		return;
+	for (let other_canvas of document.querySelectorAll('canvas')) {
+		if ($(other_canvas).offset().left < 600){
+			return null;
+		}
+	}
 	let canvas = document.createElement("canvas");
 	if ("{{drawing_tool_order}}" == "1")
 	{
@@ -132,6 +137,10 @@ if ("{{implement_conveyor_belt}}" == "True")
 {
 	canvas_script_loop = () => {
 		let canvas = make_new_canvas();
+		if (canvas == null)
+		{
+			setTimeout(canvas_script_loop, 100);
+		}
 		if ("{{drawing_tool_order}}" == "1")
 		{}
 		else
@@ -147,7 +156,7 @@ if ("{{implement_conveyor_belt}}" == "True")
 			test_func(canvas);
 		}, 9000);
 		}
-		setTimeout(canvas_script_loop, delay * 1500);
+		setTimeout(canvas_script_loop, 100);
 	};
 	canvas_script_loop();
 }
