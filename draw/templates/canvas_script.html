@@ -103,6 +103,13 @@ let test_func_load = () => {
 	let canvas;
 	let context;
 	canvas = document.getElementById("{{canvas_id}}");
+	if (canvas)
+	{
+		canvas.id = '';
+	}
+	else {
+		return;
+	}
 	context = canvas.getContext('2d');
 	load_imageData(context, canvas);
 	return canvas;
