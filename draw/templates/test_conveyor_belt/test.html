@@ -4,7 +4,19 @@
 <script>
 let pop_by_position;
 let speed = 1;
-let delay = 10;
+let maximum_delay = 100;
+let plus_speed = () => {
+	if (delay > delay_increment)
+	{
+		delay -= delay_increment;
+	}
+};
+let minus_speed = () => {
+	if (delay < maximum_delay)
+	{
+		delay += delay_increment;
+	}
+};
 let add_conveyor_plate = () => {
 	let conveyor_plate = document.createElement('div');
 	conveyor_plate.setAttribute('class', 'conveyor_plate');
@@ -30,7 +42,7 @@ if ("{{implement_pop_by_position}}" == "True")
 }
 {% block js_variables %}
 {% endblock js_variables %}
-	setInterval(function () {
+	function loop_func() {
 		let conveyor_plates = document.querySelectorAll(".conveyor_plate");
 		for (let conveyor_plate of conveyor_plates)
 		{
@@ -83,7 +95,9 @@ if ("{{implement_pop_by_position}}" == "True")
 				canvas_container.style.marginLeft = `${++canvas_container_x}px`;
 			}
 		}
-	}, delay);
+		setTimeout(loop_func, delay);
+	}
+	setTimeout(loop_func, delay);
 	let machine_box_container = document.querySelector('.machine_box_container');
 	let machine_box_container_width = $(machine_box_container).width();
 	for (let i = 0; i <= machine_box_container_width; i += 100)

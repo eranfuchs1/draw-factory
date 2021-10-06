@@ -3,6 +3,10 @@
 {% include drawing_tool with canvas_id=canvas_id implement_conveyor_belt=implement_conveyor_belt %}
 {% endif %}
 <script>
+
+
+let delay_increment = 5;
+let delay = delay_increment;
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     function _getImageData(context) {
@@ -126,7 +130,7 @@ let make_new_canvas = () => {
 };
 if ("{{implement_conveyor_belt}}" == "True")
 {
-	setInterval(() => {
+	canvas_script_loop = () => {
 		let canvas = make_new_canvas();
 		if ("{{drawing_tool_order}}" == "1")
 		{}
@@ -143,6 +147,8 @@ if ("{{implement_conveyor_belt}}" == "True")
 			test_func(canvas);
 		}, 9000);
 		}
-	}, 4000);
+		setTimeout(canvas_script_loop, delay * 1500);
+	};
+	canvas_script_loop();
 }
 </script>

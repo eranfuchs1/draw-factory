@@ -3,6 +3,8 @@
 {% block content %}
 {% include 'canvas_styling_css.html' %}
 <h2>Continue drawing worker!</h2>
+<button onclick="plus_speed();">plus speed</button>
+<button onclick="minus_speed();">minus speed</button>
 {% if implement_machine_box == 'True' %}
 {% include 'machine_box.html' %}
 {% endif %}
