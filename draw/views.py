@@ -10,6 +10,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.base import ContentFile
 from PIL import Image
 from PIL import ImageChops
+import django.utils.timezone
 
 
 implement_menu_bar = True
@@ -73,12 +74,16 @@ def test_api_get_view(request, drawing_tool, using_canvas_id=None, using_in_use=
     tool_model = DrawingTools.objects.get(tool=drawing_tool)
     last_tool = DrawingTools.objects.get(order=tool_model.order - 1)
     img_converter = ImageConverter()
+    ts_now = django.utils.timezone.now()
     if using_in_use == 'True':
         found = False
         for canvas_object in Canvas.objects.filter(last_tool=last_tool):
-            if not canvas_object.in_use:
+            ts_delta = ts_now - canvas_object.in_use_ts
+            secs = ts_delta.total_seconds()
+            if not canvas_object.in_use or secs > 90:
                 img_converter.put_image(Image.open(canvas_object.img))
                 canvas_object.in_use = True
+                canvas_object.in_use_ts = ts_now
                 canvas_object.save()
                 found = True
                 image_object = canvas_object
